@@ -138,7 +138,7 @@ class WhoisEntry(dict):
                     matches = data if isinstance(data, tuple) else [data]
                     for value in matches:
                         value = self._preprocess(attr, value)
-                        if value and value not in values:
+                        if value not in values:
                             # avoid duplicates
                             values.append(value)
                 if values and attr in ('registrar', 'whois_server', 'referral_url'):
@@ -1054,7 +1054,7 @@ class WhoisAt(WhoisEntry):
         'domain_name': r'domain: *(.+)',
         'registrar': r'registrar: *(.+)',
         'name': r'personname: *(.+)',
-        'org': r'organization: *(.+)',
+        'org': r'organization: *(.*)',
         'address': r'street address: *(.+)',
         'zipcode': r'postal code: *(.+)',
         'city': r'city: *(.+)',
